@@ -78,6 +78,7 @@ class Student:
         raise Exception("other argument to less than was not a Student: " % other)
 
     def __gt__(self, other):
+
         """ This method lets you compare two students for order -- if the Student object on the left
         hand side of the > is greater than __gt__ returns true"""
         if isinstance(other, Student):
