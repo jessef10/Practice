@@ -78,51 +78,52 @@ class Student:
         raise Exception("other argument to less than was not a Student: " % other)
 
     def __gt__(self, other):
-        if isinstance(other, Student):
-            if self.__last > other.__last:
-                return True
-            elif self.__last == other.__last and self.__first > other.__first:
-                return True
-            elif self.__last == other.__last and self.__first == other.__first and self.__net_ID > other.__net_ID:
-                return True
-            else:
-                return False
-
-        raise Exception("other argument to greater than was not a Student: " % other)
+        return not (self <= other)
 
     def __ge__(self, other):
-        if isinstance(other, Student):
-            if self.__last > other.__last:
-                return True
-            elif self.__last == other.__last and self.__first > other.__first:
-                return True
-            elif self.__last == other.__last and self.__first == other.__first and self.__net_ID > other.__net_ID:
-                return True
-            elif self.__last == other.__last and self.__first == other.__first and self.__net_ID == other.__net_ID:
-                return True
-            else:
-                return False
-
-        raise Exception("other argument to greater than was not a Student: " % other)
+        return not (self < other)
 
     def __le__(self, other):
-        # this is an edit
-        if isinstance(other, Student):
-            if self.__last < other.__last:
-                return True
-            elif self.__last == other.__last and self.__first < other.__first:
-                return True
-            elif self.__last == other.__last and self.__first == other.__first and self.__net_ID < other.__net_ID:
-                return True
-            elif self.__last == other.__last and self.__first == other.__first and self.__net_ID == other.__net_ID:
-                return True
-            else:
-                return False
-
-        raise Exception("other argument to greater than was not a Student: " % other)
+        return not (self > other)
 
     def __ne__(self, other):
         return not self == other
+def test_eq():
+    print("-----------------------------------------------------")
+    print("\n__eq__() tests")
+    stu1 = Student("tom", "smith", 3.23, "tsmith")
+    stu2 = Student("tom", "smith", 3.33, "tomsmith")
+    if stu1 == stu2:
+        print(stu1, stu2, " are equal, test FAILED")
+    else:
+        print(stu1, stu2, "Not equal, test PASSED")
+
+    stu3 = Student("tom", "smith", 3.23, "tsmith")
+    if stu1 == stu3:
+        print(stu1, stu3, "are equal, test PASSED")
+    else:
+        print(stu1, stu3, "not equal, test FAILED")
+def test_gt():
+    print("-----------------------------------------------------")
+    print("__gt__() tests")
+    stu2 = Student("tom", "smith", 3.23, "tsmith")
+    stu1 = Student("tom", "smith", 3.33, "tomsmith")
+    if stu1 < stu2:
+        print(stu1, "is less, test FAILED")
+    elif stu2 < stu1:
+        print(stu2, "is less than, test PASSED")
+    else:
+        print(stu1, stu2, "are equal, test FAILED")
+
+def test_ge():
+    print("-----------------------------------------------------")
+    print("\n__ge__() tests")
+    stu1 = Student("tom", "smith", 3.23, "tsmith")
+    stu2 = Student("tom", "smith", 3.33, "tomsmith")
+    if stu1 >= stu2:
+        print(stu1, stu2, " are greater than or equal, test PASSED")
+    else:
+        print(stu1, stu2, "Not greater than or equal, test FAILED")
 
 # tests for our Student class
 
@@ -197,30 +198,6 @@ def test_lt():
         print(stu1, "is less, test FAILED")
     elif stu2 < stu1:
         print(stu2, "is less than, test PASSED")
-    else:
-        print(stu1, stu2, "are equal, test FAILED")
-
-def test_gt():
-    print("-----------------------------------------------------")
-    print("__gt__() tests")
-    stu1 = Student("tom", "smith", 3.23, "tsmith")
-    stu2 = Student("tom", "smith", 3.33, "tomsmith")
-    if stu1 > stu2:
-        print(stu1, "is greater than, test PASSED")
-    elif stu2 > stu1:
-        print(stu2, "is greater, test FAILED")
-    else:
-        print(stu1, stu2, "are equal, test FAILED")
-
-def test_ge():
-    print("-----------------------------------------------------")
-    print("__ge__() tests")
-    stu1 = Student("tom", "smith", 3.23, "tsmith")
-    stu2 = Student("tom", "smith", 3.33, "tomsmith")
-    if stu1 > stu2:
-        print(stu1, "is greater than, test PASSED")
-    elif stu2 > stu1:
-        print(stu2, "is greater, test FAILED")
     else:
         print(stu1, stu2, "are equal, test FAILED")
 
