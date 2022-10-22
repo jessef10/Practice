@@ -106,6 +106,7 @@ class Student:
         raise Exception("other argument to greater than was not a Student: " % other)
 
     def __le__(self, other):
+        # this is an edit
         if isinstance(other, Student):
             if self.__last < other.__last:
                 return True
