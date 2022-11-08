@@ -64,7 +64,7 @@ class Student:
 
     def __lt__(self, other):
         """ This method lets you compare two students for order -- if the Student object on the left
-        hand side of the < is smaller then __lt__ returns true"""
+        hand side of the < is smaller than __lt__ returns true"""
         if isinstance(other, Student):
             if self.__last < other.__last:
                 return True
@@ -78,52 +78,58 @@ class Student:
         raise Exception("other argument to less than was not a Student: " % other)
 
     def __gt__(self, other):
-        return not (self <= other)
+
+        """ This method lets you compare two students for order -- if the Student object on the left
+        hand side of the > is greater than __gt__ returns true"""
+        if isinstance(other, Student):
+            if self.__last > other.__last:
+                return True
+            elif self.__last == other.__last and self.__first > other.__first:
+                return True
+            elif self.__last == other.__last and self.__first == other.__first and self.__net_ID > other.__net_ID:
+                return True
+            else:
+                return False
+
+        raise Exception("other argument to greater than was not a Student: " % other)
 
     def __ge__(self, other):
-        return not (self < other)
+        """ This method lets you compare two students for order -- if the Student object on the left
+        hand side of the >= is greater than or equal to __ge__ returns true"""
+        if isinstance(other, Student):
+            if self.__last >= other.__last:
+                return True
+            elif self.__last == other.__last and self.__first >= other.__first:
+                return True
+            elif self.__last == other.__last and self.__first == other.__first and self.__net_ID >= other.__net_ID:
+                return True
+            else:
+                return False
+
+        raise Exception("other argument to greater than or equal to was not a Student: " % other)
 
     def __le__(self, other):
-        return not (self > other)
+        """ This method lets you compare two students for order -- if the Student object on the left
+        hand side of the <= is smaller than or equal to__le__ returns true"""
+        if isinstance(other, Student):
+            if self.__last <= other.__last:
+                return True
+            elif self.__last == other.__last and self.__first <= other.__first:
+                return True
+            elif self.__last == other.__last and self.__first == other.__first and self.__net_ID <= other.__net_ID:
+                return True
+            else:
+                return False
+
+        raise Exception("other argument to less than was not a Student: " % other)
 
     def __ne__(self, other):
-        return not self == other
-def test_eq():
-    print("-----------------------------------------------------")
-    print("\n__eq__() tests")
-    stu1 = Student("tom", "smith", 3.23, "tsmith")
-    stu2 = Student("tom", "smith", 3.33, "tomsmith")
-    if stu1 == stu2:
-        print(stu1, stu2, " are equal, test FAILED")
-    else:
-        print(stu1, stu2, "Not equal, test PASSED")
+        """this method overrides the version from the object class and lets you use != to compare Students"""
+        if isinstance(other, Student):
+            return self.__first != other.first() or self.__last != other.last() or self.__gpa != other.gpa() \
+                   or self.__net_ID != other.net_ID()
+        return False
 
-    stu3 = Student("tom", "smith", 3.23, "tsmith")
-    if stu1 == stu3:
-        print(stu1, stu3, "are equal, test PASSED")
-    else:
-        print(stu1, stu3, "not equal, test FAILED")
-def test_gt():
-    print("-----------------------------------------------------")
-    print("__gt__() tests")
-    stu2 = Student("tom", "smith", 3.23, "tsmith")
-    stu1 = Student("tom", "smith", 3.33, "tomsmith")
-    if stu1 < stu2:
-        print(stu1, "is less, test FAILED")
-    elif stu2 < stu1:
-        print(stu2, "is less than, test PASSED")
-    else:
-        print(stu1, stu2, "are equal, test FAILED")
-
-def test_ge():
-    print("-----------------------------------------------------")
-    print("\n__ge__() tests")
-    stu1 = Student("tom", "smith", 3.23, "tsmith")
-    stu2 = Student("tom", "smith", 3.33, "tomsmith")
-    if stu1 >= stu2:
-        print(stu1, stu2, " are greater than or equal, test PASSED")
-    else:
-        print(stu1, stu2, "Not greater than or equal, test FAILED")
 
 # tests for our Student class
 
@@ -202,6 +208,62 @@ def test_lt():
         print(stu1, stu2, "are equal, test FAILED")
 
 
+def test_gt():
+    print("-----------------------------------------------------")
+    print("__gt__() tests")
+    stu1 = Student("tom", "smith", 3.23, "tsmith")
+    stu2 = Student("tom", "smith", 3.33, "tomsmith")
+    if stu1 > stu2:
+        print(stu1, "is greater, test FAILED")
+    elif stu2 > stu1:
+        print(stu2, "is greater than, test PASSED")
+    else:
+        print(stu1, stu2, "are equal, test FAILED")
+
+
+def test_ge():
+    print("-----------------------------------------------------")
+    print("__ge__() tests")
+    stu1 = Student("tom", "smith", 3.23, "tsmith")
+    stu2 = Student("tom", "smith", 3.33, "tomsmith")
+    if stu1 >= stu2:
+        print(stu1, "is greater than or equal to, test FAILED")
+    elif stu2 >= stu1:
+        print(stu2, "is greater than or equal to, test PASSED")
+    else:
+        print(stu1, stu2, "are equal, test PASSED")
+
+
+def test_le():
+    print("-----------------------------------------------------")
+    print("__le__() tests")
+    stu1 = Student("tom", "smith", 3.23, "tsmith")
+    stu2 = Student("tom", "smith", 3.33, "tomsmith")
+    if stu1 <= stu2:
+        print(stu1, "is less than or equal to, test PASSED")
+    elif stu2 <= stu1:
+        print(stu2, "is less than or equal to, test FAILED")
+    else:
+        print(stu1, stu2, "are equal, test PASSED")
+
+
+def test_ne():
+    print("-----------------------------------------------------")
+    print("__ne__() tests")
+    stu1 = Student("tom", "smith", 3.23, "tsmith")
+    stu2 = Student("tom", "smith", 3.33, "tomsmith")
+    if stu1 == stu2:
+        print(stu1, stu2, " are equal, test FAILED")
+    else:
+        print(stu1, stu2, "Not equal, test PASSED")
+
+    stu3 = Student("tom", "smith", 3.23, "tsmith")
+    if stu1 == stu3:
+        print(stu1, stu3, "are equal, test FAILED")
+    else:
+        print(stu1, stu3, "not equal, test PASSED")
+
+
 def test_sort_list():
     print("-----------------------------------------------------")
     print("sort list taking advantage of __eq__() and __lt__()")
@@ -219,5 +281,10 @@ test_first_last_gpa_net_id_getters()
 test_set_first()
 test_eq()
 test_lt()
+test_gt()
+test_ge()
+test_le()
+test_ne()
 test_sort_list()
 print("*************** DONE TESTING ******************")
+# Try to add some comments at the end to practice.
